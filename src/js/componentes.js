@@ -1,7 +1,10 @@
-
 //Referencias al HTML
 
-const divTodoList = document.querySelector('.todo-list')
+import { Todo } from "../js/todo.class";
+import { todoList } from "../index";
+
+const divTodoList = document.querySelector('.todo-list');
+const inputTxt = document.querySelector('.new-todo')
 
 export const crearTodoHtml = ( todo )  => {
 
@@ -23,3 +26,37 @@ export const crearTodoHtml = ( todo )  => {
     return div.firstElementChild;
 
 }
+
+inputTxt.addEventListener('keyup', ( event ) => {
+
+    if ( (event.keyCode === 13) && (inputTxt.value.length > 0) ) {
+
+        const nuevaTarea = new Todo( inputTxt.value );
+
+        todoList.nuevoTodo( nuevaTarea );
+
+        console.log(todoList);
+
+        crearTodoHtml( nuevaTarea );
+
+        inputTxt.value = "";
+
+    } 
+
+})
+
+divTodoList.addEventListener('click' , ( event ) => {
+
+    const nombreElemnto = event.target.localName;
+    const todoElemento = event.target.parentElement.parentElement;
+    const todoId = todoElemento.getAttribute('data-id')
+
+    if (nombreElemnto.includes('input')) {
+
+        todoList.marcarCompletado( todoId );
+        
+        todoElemento.classList.toggle('completed');
+
+    }
+
+})
