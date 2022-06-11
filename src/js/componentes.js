@@ -9,8 +9,9 @@ const botonBorrar = document.querySelector('.clear-completed');
 const ulFiltros = document.querySelector('.filters');
 const anchorFilters = document.querySelectorAll('.filtro');
 
-export const crearTodoHtml = ( todo )  => {
 
+export const crearTodoHtml = ( todo )  => {
+    
     const HtmlTodo = 
     `<li class="${ (todo.completado) ? "completed" : "" }" data-id="${todo.id}">
         <div class="view">
